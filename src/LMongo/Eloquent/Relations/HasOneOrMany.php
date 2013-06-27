@@ -38,7 +38,11 @@ abstract class HasOneOrMany extends Relation {
 	{
 		$key = $this->parent->getKey();
 
-		$this->query->where($this->foreignKey, new MongoID((string) $key));
+		if(!$key) {
+			$this->query->where($this->foreignKey, new MongoID());
+		} else {
+			$this->query->where($this->foreignKey, new MongoID((string) $key));
+		}
 	}
 
 	/**
