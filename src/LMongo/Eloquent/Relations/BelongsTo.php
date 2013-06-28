@@ -60,7 +60,9 @@ class BelongsTo extends Relation {
 		// of the related models matching on the foreign key that's on a parent.
 		$key = $this->related->getKeyName();
 
-		$this->query->where($key, new MongoID((string) $this->parent->{$this->foreignKey}));
+		if($this->parent->{$this->foreignKey}) {
+			$this->query->where($key, new MongoID((string) $this->parent->{$this->foreignKey}));
+		}
 	}
 
 	/**
